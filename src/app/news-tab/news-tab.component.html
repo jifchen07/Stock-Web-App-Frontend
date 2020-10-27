@@ -1,0 +1,6 @@
+<!-- <ul>
+  <li *ngFor='let article of articles; index as i'>{{articles[i].title}}</li>
+</ul> -->
+<app-news-card *ngFor='let rowNum of rows' [rowNum]='rowNum' [articles]='articles'></app-news-card>
+
+

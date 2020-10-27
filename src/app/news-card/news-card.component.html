@@ -1,0 +1,34 @@
+<div class='container my-container'>
+  <div class='row my-row'>
+    <div class='col-lg-6 my-col'>
+      <div class="card mb-0 h-100" type='button' data-toggle="modal" data-target="#exampleModal">
+        <div class="card-body">
+          <div class='row'>
+            <div class='col-sm-4 col-lg-4'>
+              <img src="{{articles[2*rowNum].urlToImage}}">
+            </div>
+            <div class='col-sm-8 col-lg-8'>
+              <p>{{articles[2*rowNum].title}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf='articles[2*rowNum+1]' class='col-lg-6 my-col'>
+      <div class="card mb-0 h-100">
+        <div class="card-body">
+          <div class='row'>
+            <div class='col-sm-4 col-lg-4'>
+              <img src="{{articles[2*rowNum+1].urlToImage}}">
+            </div>
+            <div class='col-sm-8 col-lg-8'>
+              <p>{{articles[2*rowNum+1].title}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

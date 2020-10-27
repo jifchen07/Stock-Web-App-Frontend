@@ -1,0 +1,36 @@
+<h2>
+  STOCK SEARCH
+</h2>
+<!-- <div class="input-group col-md-4">
+  <input class="form-control py-2 border-right-0 border" type="search" placeholder="Enter stock name" [(ngModel)]="ticker" id="search-input">
+  <span class="input-group-append">
+      <button class="btn btn-outline-secondary border-left-0 border" type="submit" (click)='startSearch()'>
+          <i class="fa fa-search"></i>
+      </button>
+    </span>
+</div> -->
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input type="text"
+           placeholder="Enter stock name"
+           aria-label="Number"
+           matInput
+           [formControl]="myControl"
+           [matAutocomplete]="auto"
+           [(ngModel)]="ticker"
+           ng-model="ticker"
+           ng-model-options="{ debounce: 1000 }"
+           (ngModelChange)="updateAutoComplete()">
+    <span class="input-group-append">
+      <button class="btn btn-outline-secondary border-left-0 border" type="submit" (click)='startSearch()'>
+          <i class="fa fa-search"></i>
+      </button>
+    </span>
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of options" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+
+  </mat-form-field>
+</form>

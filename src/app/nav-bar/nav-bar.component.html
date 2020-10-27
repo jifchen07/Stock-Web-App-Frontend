@@ -1,0 +1,18 @@
+<div class="d-flex">
+  <h1>Stock Search</h1>
+  <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills">
+    <li ngbNavItem="Search">
+      <a ngbNavLink>Search</a>
+    </li>
+    <li ngbNavItem="Watchlist">
+      <a ngbNavLink>Watchlist</a>
+    </li>
+    <li ngbNavItem="Portfolio">
+      <a ngbNavLink>Portfolio</a>
+    </li>
+  </ul>
+
+  <div [ngbNavOutlet]="nav" class="ml-4"></div>
+</div>
+
+<pre>Active: {{ active }}</pre>
