@@ -19,7 +19,6 @@ export class NewsTabComponent implements OnInit {
     this.articles = this.newsData.articles;
     const numberOfRows = this.articles.length / 2 + this.articles.length % 2;
     this.rows = Array.from(Array(numberOfRows).keys());
-    console.log(this.rows);
   }
 
 }

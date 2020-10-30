@@ -27,6 +27,9 @@ import { StockPreviewComponent } from './stock-preview/stock-preview.component';
 import { NewsTabComponent } from './news-tab/news-tab.component';
 import { NewsCardComponent } from './news-card/news-card.component';
 
+import { HighchartsChartModule } from 'highcharts-angular';
+import { ChartsTabComponent } from './charts-tab/charts-tab.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +39,8 @@ import { NewsCardComponent } from './news-card/news-card.component';
     SummaryTabComponent,
     StockPreviewComponent,
     NewsTabComponent,
-    NewsCardComponent
+    NewsCardComponent,
+    ChartsTabComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +55,7 @@ import { NewsCardComponent } from './news-card/news-card.component';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
+    HighchartsChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]

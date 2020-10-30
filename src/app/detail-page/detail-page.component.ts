@@ -1,7 +1,10 @@
+import { PriceData } from './../PriceData';
 import { StockInfoService } from './../stock-info.service';
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
+import { formatCurrentTime, pad2 } from '../utility-funcs';
+
 
 @Component({
   selector: 'app-detail-page',
@@ -9,9 +12,21 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./detail-page.component.css']
 })
 export class DetailPageComponent implements OnInit {
-  descriptionData;
+  descriptionData;  // pass into summary-tab and stock-preview
   newsData;
+  priceData; // pass into summary-tab
+  priceSeriesData; // pass into summary-tab for highchart
+  lastPriceData: PriceData = {  // sent as input to stock-preview component
+    lastPrice: null,
+    change: null,
+    changePercentage: null,
+    timestamp: null,
+    changeDir: 'up',
+    marketStatus: null
+  };
+  historicalPriceData;  // pass into charts-tab
   ticker: string;
+
 
   constructor(private stockInfoService: StockInfoService, private route: ActivatedRoute) { }
 
@@ -20,21 +35,79 @@ export class DetailPageComponent implements OnInit {
     this.stockInfoService.setTickerValue(this.ticker);
     // this.stockInfoService.getData();
     this.updateData();
+    this.refreshPriceData();
+    // setInterval(() => { this.refreshPriceData()}, 15000 );
   }
 
-  updateData() {
-    this.stockInfoService.getDescriptionData().subscribe((data) => {
+  updateData(): void {
+    this.stockInfoService.getDescriptionData(this.ticker).subscribe((data) => {
       this.descriptionData = data;
       console.log(this.descriptionData);
     });
     // this.data = this.stockInfoService.data;
     // console.log('in showData()' + this.data);
 
-    this.stockInfoService.getNewsData().subscribe((data) => {
+    this.stockInfoService.getNewsData(this.ticker).subscribe((data) => {
       this.newsData = data;
       console.log(this.newsData);
     });
+
+    this.stockInfoService.get2yearsPriceData(this.ticker).subscribe((data) => {
+      this.historicalPriceData = data;
+      console.log(this.historicalPriceData);
+    });
   }
 
+  // this function is called every 15 seconds to refresh the price data
+  refreshPriceData(): void {
+    this.stockInfoService.getLastPriceData(this.ticker).subscribe((data) => {
+      this.priceData = data[0];
+      console.log(data);
+      this.lastPriceData.lastPrice = data[0].last;
+      const change = (data[0].last - data[0].prevClose);
+      const changePercentage = change * 100 / data[0].prevClose;
+      this.lastPriceData.change = change.toFixed(2);
+      if (change < 0) {
+        this.lastPriceData.changeDir = 'down';  // for color styling based on change dir
+      }
+      this.lastPriceData.changePercentage = '(' + changePercentage.toFixed(2) + '%' + ')';
+
+      if (data[0].askPrice == null) {
+        // if market is closed
+        console.log('market closed');
+        this.lastPriceData.timestamp = formatCurrentTime();
+        const lastTime = data[0].timestamp.substring(0, 10)
+          + ' ' + data[0].timestamp.substring(11, 19);
+        this.lastPriceData.marketStatus = 'Market Closed on ' + lastTime;
+
+        const fromDate = data[0].timestamp.substring(0, 10);
+        this.updateDailyPriceData(fromDate);
+      } else {
+        // if market is open
+        this.lastPriceData.timestamp = formatCurrentTime();
+        this.lastPriceData.marketStatus = 'Market is Open';
+
+        const fromDate = formatCurrentTime().substring(0, 10);
+        this.updateDailyPriceData(fromDate);
+      }
+    });
+  }
+
+  updateDailyPriceData(fromDate: string): void {
+    this.stockInfoService.getDailyPriceData(this.ticker, fromDate).subscribe((data: Array<any>) => {
+      // tslint:disable-next-line: prefer-for-of
+      console.log(data);
+      let priceSeries = [];
+      for (let i = 0; i < data.length; i++) {
+        let timeString = new Date(data[i].date.substring(0, 19)).toString();
+        let timestamp = Date.parse(timeString);
+        priceSeries[i] = [timestamp, data[i].close];
+      }
+      this.priceSeriesData = priceSeries;
+      console.log('dailypriceupdate: ');
+      console.log(this.priceSeriesData);
+
+    });
+  }
 
 }

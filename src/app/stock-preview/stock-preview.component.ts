@@ -1,3 +1,4 @@
+import { PriceData } from './../PriceData';
 import { DetailPageComponent } from './../detail-page/detail-page.component';
 import { Component, OnInit, Input } from '@angular/core';
 
@@ -9,6 +10,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class StockPreviewComponent implements OnInit {
   @Input() descriptionData;
+  @Input() lastPriceData: PriceData;
   constructor() { }
 
   ngOnInit(): void {
