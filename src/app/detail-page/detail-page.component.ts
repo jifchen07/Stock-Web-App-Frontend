@@ -1,6 +1,6 @@
 import { PriceData } from './../PriceData';
 import { StockInfoService } from './../stock-info.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { formatCurrentTime, pad2 } from '../utility-funcs';
@@ -93,6 +93,7 @@ export class DetailPageComponent implements OnInit {
     });
   }
 
+  // get the price data for one day (either current day if market open or last day of market closed)
   updateDailyPriceData(fromDate: string): void {
     this.stockInfoService.getDailyPriceData(this.ticker, fromDate).subscribe((data: Array<any>) => {
       // tslint:disable-next-line: prefer-for-of

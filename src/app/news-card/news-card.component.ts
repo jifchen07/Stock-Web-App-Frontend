@@ -11,7 +11,7 @@ import * as moment from 'moment';
       <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
-</div>
+    </div>
     <div class="modal-body">
       <h3>{{article.title}}</h3>
       <p>{{article.description}}!</p>

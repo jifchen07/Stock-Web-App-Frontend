@@ -29,6 +29,7 @@ import { NewsCardComponent } from './news-card/news-card.component';
 
 import { HighchartsChartModule } from 'highcharts-angular';
 import { ChartsTabComponent } from './charts-tab/charts-tab.component';
+import { WatchlistPageComponent } from './watchlist-page/watchlist-page.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ChartsTabComponent } from './charts-tab/charts-tab.component';
     StockPreviewComponent,
     NewsTabComponent,
     NewsCardComponent,
-    ChartsTabComponent
+    ChartsTabComponent,
+    WatchlistPageComponent
   ],
   imports: [
     BrowserModule,

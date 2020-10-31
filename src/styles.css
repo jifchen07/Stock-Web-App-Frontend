@@ -2,3 +2,30 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+.my-container {
+  border: 1px solid green;
+}
+.my-row {
+  border: 3px solid red;
+}
+.my-col {
+  border: 3px dotted blue;
+}
+.left-col {
+  text-align: left;
+}
+.right-col {
+  text-align: right;
+}
+
+.close-button {
+  width: 10px;
+  height: 10px;
+}

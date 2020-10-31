@@ -1,0 +1,33 @@
+<h1>My Watchlist</h1>
+<!-- <button> Click me </button>
+<div class="card card-outline-danger text-center">
+  <span class="pull-right clickable close-icon" data-effect="fadeOut"><i class="fa fa-times"></i></span>
+  <div class="card-block">
+    <blockquote class="card-blockquote">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+      <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+    </blockquote>
+  </div>
+</div> -->
+<div class="container">
+  <div class='border'>
+    <div *ngFor='let ticker of watchlist; index as i' class='card' type='button' (click)='navigateTo(ticker)'>
+      <span class="mr-2">
+        <button type="button" class="close close-button pull-right" aria-label="Close" (click)='removeTicker(i)'>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </span>
+
+      <div class='card-body'>
+        <div class="row">
+          <p class='col-sm-6 col-xs-6 left-col'>{{watchlist[i]}}</p>
+          <p class='col-sm-6 col-xs-6 right-col'>{{priceData[i].lastPrice}}</p>
+        </div>
+        <div class='row'>
+          <p class='col-sm-6 left-col'>{{descriptionData[i].name}}</p>
+          <p class='col-sm-6 right-col'>{{priceData[i].change + ' ' + priceData[i].changePercentage}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
