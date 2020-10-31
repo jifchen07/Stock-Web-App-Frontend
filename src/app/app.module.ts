@@ -30,6 +30,7 @@ import { NewsCardComponent } from './news-card/news-card.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { ChartsTabComponent } from './charts-tab/charts-tab.component';
 import { WatchlistPageComponent } from './watchlist-page/watchlist-page.component';
+import { ModalBuyComponent } from './modal-buy/modal-buy.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { WatchlistPageComponent } from './watchlist-page/watchlist-page.componen
     NewsTabComponent,
     NewsCardComponent,
     ChartsTabComponent,
-    WatchlistPageComponent
+    WatchlistPageComponent,
+    ModalBuyComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +62,7 @@ import { WatchlistPageComponent } from './watchlist-page/watchlist-page.componen
     HighchartsChartModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ ModalBuyComponent ]
 })
 export class AppModule { }
