@@ -69,6 +69,7 @@ export class StockPreviewComponent implements OnInit {
     if (this.modalRef) {
       this.modalRef.componentInstance.ticker = this.descriptionData.ticker;
       this.modalRef.componentInstance.tickerPrice = this.lastPriceData.lastPrice;
+      this.modalRef.componentInstance.name = this.descriptionData.name;
     }
   }
 
@@ -90,6 +91,7 @@ export class StockPreviewComponent implements OnInit {
     this.modalRef = this.modalService.open(ModalBuyComponent);
     this.modalRef.componentInstance.ticker = this.descriptionData.ticker;
     this.modalRef.componentInstance.tickerPrice = this.lastPriceData.lastPrice;
+    this.modalRef.componentInstance.name = this.descriptionData.name;
 
     // const modalRef = this.modalService.open(ModalBuyComponent);
     // modalRef.componentInstance.ticker = this.descriptionData.ticker;

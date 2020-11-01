@@ -18,8 +18,8 @@ export class LocalStorageService {
   }
 
   initializePortfolio(): void {
-    const initPortfolio = [{ticker: 'GOOG', name: 'Alphabet Inc Class C', numOfShares: 20, totalCost: 28565.8},
-    {ticker: 'NVDA', name: 'NVDIA Corp', numOfShares: 55, totalCost: 30780.1}];
+    const initPortfolio = {GOOG: {name: 'Alphabet Inc Class C', numOfShares: 20, totalCost: 28565.8, avgCpS: 1428.29},
+    NVDA: {name: 'NVDIA Corp', numOfShares: 55, totalCost: 30780.1, avgCpS: 559.64}};
     this.localStorage.setItem('portfolio', JSON.stringify(initPortfolio));
   }
 
@@ -29,6 +29,10 @@ export class LocalStorageService {
 
   getPortfolio(): Array<any> {
     return JSON.parse(this.localStorage.getItem('portfolio'));
+  }
+
+  updatePortfolio(data: any): void {
+    this.localStorage.setItem('portfolio', JSON.stringify(data));
   }
 
   removeTicker(index: number): void {

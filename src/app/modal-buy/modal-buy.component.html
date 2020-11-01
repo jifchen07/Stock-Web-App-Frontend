@@ -16,7 +16,7 @@
   <p class=''>Total: {{totalCost}}</p>
   <button
   type="button" class="btn btn-outline-dark"
-  [disabled]='numOfStocks == 0' (click)="activeModal.close('Close click')">
+  [disabled]='!(numOfStocks > 0)' (click)="buyStocks(); activeModal.close('Close click')">
     Buy
   </button>
 </div>

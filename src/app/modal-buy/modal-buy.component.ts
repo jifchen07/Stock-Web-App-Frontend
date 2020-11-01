@@ -11,6 +11,7 @@ import { LocalStorageService } from './../local-storage.service';
 export class ModalBuyComponent implements OnInit {
   @Input() public ticker;
   @Input() public tickerPrice;
+  @Input() public name;
   numOfStocks: number = 0;
   totalCost: number = 0.00;
 
@@ -28,6 +29,24 @@ export class ModalBuyComponent implements OnInit {
   // update the total price every time ticker price changes
   ngOnChanges(): void {
     this.calculateCost();
+  }
+
+  buyStocks(): void {
+    let data = this.localStorageService.getPortfolio();
+    if (this.ticker in data) {
+      const numOfSharesNew = data[this.ticker].numOfShares + this.numOfStocks;
+      const totalCostNew = data[this.ticker].totalCost + this.totalCost;
+      const avgCpSNew = totalCostNew / numOfSharesNew;
+      data[this.ticker].numOfShares = numOfSharesNew;
+      data[this.ticker].totalCost = totalCostNew;
+      data[this.ticker].avgCpS = avgCpSNew;
+    } else {
+      data[this.ticker].name = this.name;
+      data[this.ticker].numOfShares = this.numOfStocks;
+      data[this.ticker].totalCost = this.totalCost;
+      data[this.ticker].avgCpS = this.totalCost / this.numOfStocks;
+    }
+    this.localStorageService.updatePortfolio(data);
   }
 
 }
