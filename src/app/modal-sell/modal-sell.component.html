@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <h1 class="modal-title">{{ticker.toUpperCase()}} </h1>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <p>Current Price: {{tickerPrice}} </p><br>
+  <!-- <form> -->
+    <label>Quantity </label>
+    <input type="number" id="quantity" name="quantity" min='0' [(ngModel)]="numOfStocks" (ngModelChange)='calculateCost()'>
+  <!-- </form> -->
+</div>
+<div class="modal-footer">
+  <p class=''>Total: {{totalCost}}</p>
+  <button
+  type="button" class="btn btn-outline-dark"
+  [disabled]='!(numOfStocks > 0 && numOfStocks <= totalNum)' (click)="sellStocks(); activeModal.close('Close click')">
+    Sell
+  </button>
+</div>

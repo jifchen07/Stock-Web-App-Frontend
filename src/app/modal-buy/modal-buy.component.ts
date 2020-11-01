@@ -41,10 +41,10 @@ export class ModalBuyComponent implements OnInit {
       data[this.ticker].totalCost = totalCostNew;
       data[this.ticker].avgCpS = avgCpSNew;
     } else {
-      data[this.ticker].name = this.name;
-      data[this.ticker].numOfShares = this.numOfStocks;
-      data[this.ticker].totalCost = this.totalCost;
-      data[this.ticker].avgCpS = this.totalCost / this.numOfStocks;
+      data[this.ticker] = {name: this.name,
+      numOfShares: this.numOfStocks,
+      totalCost: this.totalCost,
+      avgCpS: this.totalCost / this.numOfStocks};
     }
     this.localStorageService.updatePortfolio(data);
   }

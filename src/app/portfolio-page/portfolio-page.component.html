@@ -1,11 +1,11 @@
 <h1>My Portfolio</h1>
 <div class='container'>
-  <div *ngFor='let holding of holdings | keyvalue' class='card' type='button' (click)='navigateTo(holding.key)'>
+  <div *ngFor='let holding of holdings | keyvalue' class='card'>
     <div class='card-header'>
       <span class='mr-2'>{{holding.key}}</span>
       <span>{{holding.value.name}}</span>
     </div>
-    <div class='card-body'>
+    <div class='card-body' type='button' (click)='navigateTo(holding.key)'>
       <div class='row'>
         <div class='col-6'>
           <div class='float-left'>Quantity:</div>
@@ -33,13 +33,13 @@
         </div>
         <div class='col-6'>
           <div class='float-left'>Market Value:</div>
-          <div class='float-right'>{{holding.value.numOfShares * lastPriceInfo[holding.key].lastPrice}}</div>
+          <div class='float-right'>{{(holding.value.numOfShares * lastPriceInfo[holding.key].lastPrice).toFixed(2)}}</div>
         </div>
       </div>
     </div>
     <div class='card-footer'>
-      <button class='float-right mr-1'>Sell</button>
-      <button class='float-right mr-3'>Buy</button>
+      <button class='float-right mr-1' (click)='openSellModal(holding.key, lastPriceInfo[holding.key].lastPrice, holding.value.numOfShares)'>Sell</button>
+      <button class='float-right mr-3' (click)='openBuyModal(holding.key, lastPriceInfo[holding.key].lastPrice, holding.value.name)'>Buy</button>
     </div>
   </div>
 </div>

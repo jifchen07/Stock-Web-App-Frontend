@@ -3,6 +3,10 @@ import { Router } from '@angular/router';
 import { LocalStorageService } from '../local-storage.service';
 import { StockInfoService } from '../stock-info.service';
 
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalBuyComponent } from './../modal-buy/modal-buy.component';
+import { ModalSellComponent } from '../modal-sell/modal-sell.component';
+
 @Component({
   selector: 'app-portfolio-page',
   templateUrl: './portfolio-page.component.html',
@@ -11,9 +15,13 @@ import { StockInfoService } from '../stock-info.service';
 export class PortfolioPageComponent implements OnInit {
   holdings = {};
   lastPriceInfo = {};
+  modalRef = null;
 
   constructor(
-    private router: Router, private localStorageService: LocalStorageService, private stockInfoService: StockInfoService) { }
+    private router: Router,
+    private localStorageService: LocalStorageService,
+    private stockInfoService: StockInfoService,
+    private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.holdings = this.localStorageService.getPortfolio();
@@ -40,5 +48,30 @@ export class PortfolioPageComponent implements OnInit {
 
   navigateTo(ticker: string): void {
     this.router.navigateByUrl(`/details/${ticker}`);
+  }
+
+  openBuyModal(ticker: string, price: number, name: string): void {
+    this.modalRef = this.modalService.open(ModalBuyComponent);
+    this.modalRef.componentInstance.ticker = ticker;
+    this.modalRef.componentInstance.tickerPrice = price;
+    this.modalRef.componentInstance.name = name;
+    this.modalRef.result.finally(() => {
+      this.holdings = this.localStorageService.getPortfolio();
+    });
+
+    // const modalRef = this.modalService.open(ModalBuyComponent);
+    // modalRef.componentInstance.ticker = this.descriptionData.ticker;
+    // modalRef.componentInstance.tickerPrice = this.lastPriceData.lastPrice;
+
+  }
+
+  openSellModal(ticker: string, price: number, numOfShares: number): void {
+    this.modalRef = this.modalService.open(ModalSellComponent);
+    this.modalRef.componentInstance.ticker = ticker;
+    this.modalRef.componentInstance.tickerPrice = price;
+    this.modalRef.componentInstance.totalNum = numOfShares;
+    this.modalRef.result.finally(() => {
+      this.holdings = this.localStorageService.getPortfolio();
+    });
   }
 }
