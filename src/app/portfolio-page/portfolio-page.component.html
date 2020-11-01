@@ -1,0 +1,45 @@
+<h1>My Portfolio</h1>
+<div class='container'>
+  <div *ngFor='let holding of holdings' class='card'>
+    <div class='card-header'>
+      <span>{{holding.ticker}}</span>
+      <span>Alphabet inc</span>
+    </div>
+    <div class='card-body'>
+      <div class='row'>
+        <div class='col-6'>
+          <div class='float-left'>Quantity:</div>
+          <div class='float-right'>20</div>
+        </div>
+        <div class='col-6'>
+          <div class='float-left'>Change:</div>
+          <div class='float-right'>42.67</div>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-6'>
+          <div class='float-left'>Avg. Cost / Share:</div>
+          <div class='float-right'>111</div>
+        </div>
+        <div class='col-6'>
+          <div class='float-left'>Current Price:</div>
+          <div class='float-right'>222</div>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-6'>
+          <div class='float-left'>Total Cost:</div>
+          <div class='float-right'>111</div>
+        </div>
+        <div class='col-6'>
+          <div class='float-left'>Market Value:</div>
+          <div class='float-right'>222</div>
+        </div>
+      </div>
+    </div>
+    <div class='card-footer'>
+      <button class='float-right mr-1'>Sell</button>
+      <button class='float-right mr-3'>Buy</button>
+    </div>
+  </div>
+</div>

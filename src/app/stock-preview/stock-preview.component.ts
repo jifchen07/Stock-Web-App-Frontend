@@ -1,12 +1,10 @@
 
 import { LocalStorageService } from './../local-storage.service';
 import { PriceData } from './../PriceData';
-import { DetailPageComponent } from './../detail-page/detail-page.component';
+
 import { Component, OnInit, Input } from '@angular/core';
 
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-import {FormControl} from '@angular/forms';
 
 import { ModalBuyComponent } from './../modal-buy/modal-buy.component';
 
@@ -57,7 +55,6 @@ export class StockPreviewComponent implements OnInit {
   @Input() descriptionData;
   @Input() lastPriceData: PriceData;
   modalRef = null;
-  tmp;
 
   favorited: boolean = false;
 
@@ -69,10 +66,10 @@ export class StockPreviewComponent implements OnInit {
 
   ngOnChanges(): void {
     this.checkFavoriteStatus();
-    // if (this.modalRef) {
-    //   this.modalRef.componentInstance.ticker = this.descriptionData.ticker;
-    //   this.modalRef.componentInstance.tickerPrice = this.lastPriceData.lastPrice;
-    // }
+    if (this.modalRef) {
+      this.modalRef.componentInstance.ticker = this.descriptionData.ticker;
+      this.modalRef.componentInstance.tickerPrice = this.lastPriceData.lastPrice;
+    }
   }
 
   favorite(): void {
@@ -90,13 +87,13 @@ export class StockPreviewComponent implements OnInit {
   }
 
   openBuyModal(): void {
-    // this.modalRef = this.modalService.open(NgbdModalContent);
-    // this.modalRef.componentInstance.ticker = this.descriptionData.ticker;
-    // this.modalRef.componentInstance.tickerPrice = this.lastPriceData.lastPrice;
+    this.modalRef = this.modalService.open(ModalBuyComponent);
+    this.modalRef.componentInstance.ticker = this.descriptionData.ticker;
+    this.modalRef.componentInstance.tickerPrice = this.lastPriceData.lastPrice;
 
-    const modalRef = this.modalService.open(ModalBuyComponent);
-    modalRef.componentInstance.ticker = this.descriptionData.ticker;
-    modalRef.componentInstance.tickerPrice = this.lastPriceData.lastPrice;
+    // const modalRef = this.modalService.open(ModalBuyComponent);
+    // modalRef.componentInstance.ticker = this.descriptionData.ticker;
+    // modalRef.componentInstance.tickerPrice = this.lastPriceData.lastPrice;
 
   }
 }

@@ -4,7 +4,7 @@ import { LocalStorageService } from './../local-storage.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-declare var $: any;
+// declare var $: any;
 
 @Component({
   selector: 'app-watchlist-page',
@@ -19,15 +19,15 @@ export class WatchlistPageComponent implements OnInit {
   constructor(private router: Router, private localStorageService: LocalStorageService, private stockInfoService: StockInfoService) { }
 
   ngOnInit(): void {
-    $('button').click(function(){
-      alert('Wass up!');
-    });
-    $('.close-icon').on('click', function() {
-      $(this).closest('.card').fadeOut();
-    });
+    // $('button').click(function(){
+    //   alert('Wass up!');
+    // });
+    // $('.close-icon').on('click', function() {
+    //   $(this).closest('.card').fadeOut();
+    // });
 
     this.watchlist = this.localStorageService.getWatchlist();
-    this.updateData();
+    this.updateData();  // update the current price data
   }
 
   updateData(): void {

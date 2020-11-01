@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
+import { LocalStorageService } from './../local-storage.service';
+
 @Component({
   selector: 'app-modal-buy',
   templateUrl: './modal-buy.component.html',
@@ -12,7 +14,7 @@ export class ModalBuyComponent implements OnInit {
   numOfStocks: number = 0;
   totalCost: number = 0.00;
 
-  constructor(public activeModal: NgbActiveModal) { }
+  constructor(public activeModal: NgbActiveModal, private localStorageService: LocalStorageService) { }
 
   ngOnInit(): void {
     console.log(this.ticker);
@@ -21,6 +23,11 @@ export class ModalBuyComponent implements OnInit {
   calculateCost(): void {
     console.log('changed');
     this.totalCost = this.numOfStocks * this.tickerPrice;
+  }
+
+  // update the total price every time ticker price changes
+  ngOnChanges(): void {
+    this.calculateCost();
   }
 
 }

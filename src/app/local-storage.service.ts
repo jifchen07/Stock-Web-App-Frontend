@@ -9,6 +9,7 @@ export class LocalStorageService {
   constructor() {
     this.localStorage = window.localStorage;
     this.initializeWatchlist();
+    this.initializePortfolio();
   }
 
   initializeWatchlist(): void {
@@ -16,8 +17,18 @@ export class LocalStorageService {
     this.localStorage.setItem('watchlist', JSON.stringify(initTickers));
   }
 
+  initializePortfolio(): void {
+    const initPortfolio = [{ticker: 'GOOG', name: 'Alphabet Inc Class C', numOfShares: 20, totalCost: 28565.8},
+    {ticker: 'NVDA', name: 'NVDIA Corp', numOfShares: 55, totalCost: 30780.1}];
+    this.localStorage.setItem('portfolio', JSON.stringify(initPortfolio));
+  }
+
   getWatchlist(): Array<any> {
     return JSON.parse(this.localStorage.getItem('watchlist'));
+  }
+
+  getPortfolio(): Array<any> {
+    return JSON.parse(this.localStorage.getItem('portfolio'));
   }
 
   removeTicker(index: number): void {

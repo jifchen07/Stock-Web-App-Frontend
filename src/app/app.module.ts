@@ -31,6 +31,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { ChartsTabComponent } from './charts-tab/charts-tab.component';
 import { WatchlistPageComponent } from './watchlist-page/watchlist-page.component';
 import { ModalBuyComponent } from './modal-buy/modal-buy.component';
+import { PortfolioPageComponent } from './portfolio-page/portfolio-page.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ModalBuyComponent } from './modal-buy/modal-buy.component';
     ChartsTabComponent,
     WatchlistPageComponent,
     ModalBuyComponent,
+    PortfolioPageComponent,
   ],
   imports: [
     BrowserModule,

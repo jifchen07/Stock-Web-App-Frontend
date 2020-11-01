@@ -13,6 +13,10 @@
   <!-- </form> -->
 </div>
 <div class="modal-footer">
-  <p>Total: {{totalCost}}</p>
-  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Buy</button>
+  <p class=''>Total: {{totalCost}}</p>
+  <button
+  type="button" class="btn btn-outline-dark"
+  [disabled]='numOfStocks == 0' (click)="activeModal.close('Close click')">
+    Buy
+  </button>
 </div>
