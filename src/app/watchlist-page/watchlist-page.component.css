@@ -1,0 +1,23 @@
+.bigger {
+  font-size: 25px;
+}
+
+.smaller {
+  font-size: 15px;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
+.my-spinner {
+  margin-top: 100px;
+}

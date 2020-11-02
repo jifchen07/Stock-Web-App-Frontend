@@ -1,4 +1,7 @@
-<h1>My Watchlist</h1>
+<div class='container mt-5 mb-5'>
+  <h1><b>My Watchlist</b></h1>
+</div>
+
 <!-- <button> Click me </button>
 <div class="card card-outline-danger text-center">
   <span class="pull-right clickable close-icon" data-effect="fadeOut"><i class="fa fa-times"></i></span>
@@ -9,9 +12,9 @@
     </blockquote>
   </div>
 </div> -->
-<div class="container">
-  <div class='border'>
-    <div *ngFor='let ticker of watchlist; index as i' class='card' type='button' (click)='navigateTo(ticker)'>
+<div class="container" *ngIf='loadingNum === 0'>
+  <div>
+    <div *ngFor='let ticker of watchlist; index as i' class='card mb-2' type='button' (click)='navigateTo(ticker)'>
       <span class="mr-2">
         <button type="button" class="close close-button pull-right" aria-label="Close" (click)='removeTicker(i)'>
           <span aria-hidden="true">&times;</span>
@@ -19,15 +22,34 @@
       </span>
 
       <div class='card-body'>
-        <div class="row">
-          <p class='col-sm-6 col-xs-6 left-col'>{{watchlist[i]}}</p>
-          <p class='col-sm-6 col-xs-6 right-col'>{{priceData[i].lastPrice}}</p>
+        <div class="row bigger">
+          <p class='col-6 left-col'>{{watchlist[i]}}</p>
+          <p [ngClass]='{"col-6 right-col":true, "green":priceData[i].changeDir==="up", "red":!(priceData[i].changeDir==="up")}'>
+            {{priceData[i].lastPrice}}
+          </p>
         </div>
-        <div class='row'>
-          <p class='col-sm-6 left-col'>{{descriptionData[i].name}}</p>
-          <p class='col-sm-6 right-col'>{{priceData[i].change + ' ' + priceData[i].changePercentage}}</p>
+        <div class='row smaller'>
+          <p class='col-6 left-col'>{{descriptionData[i].name}}</p>
+          <p [ngClass]='{"col-6 right-col":true, "green":priceData[i].changeDir==="up", "red":!(priceData[i].changeDir==="up")}'>
+            <svg *ngIf='priceData[i].changeDir==="up"' width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-up-fill" fill="green" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+            </svg>
+            <svg *ngIf='!(priceData[i].changeDir==="up")'width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="red" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+            {{priceData[i].change + ' ' + priceData[i].changePercentage}}</p>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class='row justify-content-center my-spinner' *ngIf='loadingNum > 0'>
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class='container'  *ngIf='loadingNum === 0 && watchlist.length == 0'>
+  <div class="alert alert-warning text-center" role="alert">
+    Currently you don't have any stock in your watchlist.
   </div>
 </div>

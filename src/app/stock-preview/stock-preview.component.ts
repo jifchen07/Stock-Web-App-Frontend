@@ -7,7 +7,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ModalBuyComponent } from './../modal-buy/modal-buy.component';
-import { IterableDiffer, IterableDiffers, DoCheck, IterableChanges } from '@angular/core';
 
 
 // @Component({
@@ -58,17 +57,13 @@ export class StockPreviewComponent implements OnInit {
   @Input() lastPrice: number;
   modalRef = null;
 
-  private diff: IterableDiffer<any>;
-
   favorited: boolean = false;
 
   constructor(
-    private iterableDiffers: IterableDiffers,
     private localStorageService: LocalStorageService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.checkFavoriteStatus();
-    this.diff = this.iterableDiffers.find(this.lastPriceData).create();
   }
 
   // ngDoCheck(): void {

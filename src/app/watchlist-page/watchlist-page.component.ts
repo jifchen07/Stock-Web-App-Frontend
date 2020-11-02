@@ -15,6 +15,7 @@ export class WatchlistPageComponent implements OnInit {
   watchlist: Array<string> = [];
   priceData: Array<PriceData> = [];
   descriptionData: Array<any> = [];
+  loadingNum = 0;
 
   constructor(private router: Router, private localStorageService: LocalStorageService, private stockInfoService: StockInfoService) { }
 
@@ -34,7 +35,9 @@ export class WatchlistPageComponent implements OnInit {
     if (this.watchlist.length > 0) {
       const tickers = this.watchlist.toString();
       // this.priceData = Array(this.watchlist.length);
+      this.loadingNum += 1;
       this.stockInfoService.getLastPriceData(tickers).subscribe((data: Array<any>) => {
+        this.loadingNum -= 1;
         // tslint:disable-next-line: prefer-for-of
         for (let i = 0; i < this.watchlist.length; i++) {
           this.priceData[i] = {
@@ -59,7 +62,9 @@ export class WatchlistPageComponent implements OnInit {
       // tslint:disable-next-line: prefer-for-of
       this.descriptionData = Array(this.watchlist.length);
       for (let i = 0; i < this.watchlist.length; i++) {
+        this.loadingNum += 1;
         this.stockInfoService.getDescriptionData(this.watchlist[i]).subscribe((data) => {
+          this.loadingNum -= 1;
           this.descriptionData[i] = data;
         });
       }
