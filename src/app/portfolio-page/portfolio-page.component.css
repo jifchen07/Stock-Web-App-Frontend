@@ -1,0 +1,28 @@
+div {
+  font-size: 18px;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+.ticker {
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.name {
+  color: gray
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
+.my-spinner {
+  margin-top: 100px;
+}

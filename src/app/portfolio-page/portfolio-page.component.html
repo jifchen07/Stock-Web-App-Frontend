@@ -1,45 +1,65 @@
-<h1>My Portfolio</h1>
-<div class='container'>
-  <div *ngFor='let holding of holdings | keyvalue' class='card'>
+<div class='container mt-5 mb-5'>
+  <h1><b>My Portfolio</b></h1>
+</div>
+<div *ngIf='loadingNum === 0' class='container'>
+  <div *ngFor='let holding of holdings | keyvalue' class='card mb-2'>
     <div class='card-header'>
-      <span class='mr-2'>{{holding.key}}</span>
-      <span>{{holding.value.name}}</span>
+      <span class='mr-2 ticker'>{{holding.key}}</span>
+      <span class='name'>{{holding.value.name}}</span>
     </div>
     <div class='card-body' type='button' (click)='navigateTo(holding.key)'>
       <div class='row'>
-        <div class='col-6'>
-          <div class='float-left'>Quantity:</div>
-          <div class='float-right'>{{holding.value.numOfShares}}</div>
+        <div class='col-lg-6'>
+          <div class='row justify-content-between ml-1 mr-1'>
+            <div class='float-left'>Quantity:</div>
+            <div class='float-right'>{{holding.value.numOfShares}}</div>
+          </div>
+          <div class='row justify-content-between ml-1 mr-1'>
+            <div class='float-left'>Avg. Cost / Share:</div>
+            <div class='float-right'>{{holding.value.avgCpS.toFixed(2)}}</div>
+          </div>
+          <div class='row justify-content-between ml-1 mr-1'>
+            <div class='float-left'>Total Cost:</div>
+            <div class='float-right'>{{holding.value.totalCost.toFixed(2)}}</div>
+          </div>
         </div>
-        <div class='col-6'>
-          <div class='float-left'>Change:</div>
-          <div class='float-right'>{{lastPriceInfo[holding.key].change}}</div>
-        </div>
-      </div>
-      <div class='row'>
-        <div class='col-6'>
-          <div class='float-left'>Avg. Cost / Share:</div>
-          <div class='float-right'>{{holding.value.avgCpS.toFixed(2)}}</div>
-        </div>
-        <div class='col-6'>
-          <div class='float-left'>Current Price:</div>
-          <div class='float-right'>{{lastPriceInfo[holding.key].lastPrice}}</div>
-        </div>
-      </div>
-      <div class='row'>
-        <div class='col-6'>
-          <div class='float-left'>Total Cost:</div>
-          <div class='float-right'>{{holding.value.totalCost}}</div>
-        </div>
-        <div class='col-6'>
-          <div class='float-left'>Market Value:</div>
-          <div class='float-right'>{{(holding.value.numOfShares * lastPriceInfo[holding.key].lastPrice).toFixed(2)}}</div>
+        <div class='col-lg-6'>
+          <div class='row justify-content-between ml-1 mr-1'>
+            <div class='float-left'>Change:</div>
+            <div [ngClass]='{"float-right":true, "green":lastPriceInfo[holding.key].change >= 0, "red":lastPriceInfo[holding.key].change < 0}'>
+              <svg *ngIf='lastPriceInfo[holding.key].change >= 0' width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-up-fill" fill="green" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+              </svg>
+              <svg *ngIf='lastPriceInfo[holding.key].change < 0'width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-down-fill" fill="red" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+              </svg>
+              {{lastPriceInfo[holding.key].change}}
+            </div>
+          </div>
+          <div class='row justify-content-between ml-1 mr-1'>
+            <div class='float-left'>Current Price:</div>
+            <div [ngClass]='{"float-right":true, "green":lastPriceInfo[holding.key].change >= 0, "red":lastPriceInfo[holding.key].change < 0}'>{{lastPriceInfo[holding.key].lastPrice}}</div>
+          </div>
+          <div class='row justify-content-between ml-1 mr-1'>
+            <div class='float-left'>Market Value:</div>
+            <div [ngClass]='{"float-right":true, "green":lastPriceInfo[holding.key].change >= 0, "red":lastPriceInfo[holding.key].change < 0}'>{{(holding.value.numOfShares * lastPriceInfo[holding.key].lastPrice).toFixed(2)}}</div>
+          </div>
         </div>
       </div>
     </div>
     <div class='card-footer'>
-      <button class='float-right mr-1' (click)='openSellModal(holding.key, lastPriceInfo[holding.key].lastPrice, holding.value.numOfShares)'>Sell</button>
-      <button class='float-right mr-3' (click)='openBuyModal(holding.key, lastPriceInfo[holding.key].lastPrice, holding.value.name)'>Buy</button>
+      <button type='button' class='btn btn-danger float-right mr-1' (click)='openSellModal(holding.key, lastPriceInfo[holding.key].lastPrice, holding.value.numOfShares)'>Sell</button>
+      <button type='button' class='btn btn-success float-right mr-3' (click)='openBuyModal(holding.key, lastPriceInfo[holding.key].lastPrice, holding.value.name)'>Buy</button>
     </div>
+  </div>
+</div>
+
+<div class='row justify-content-center my-spinner' *ngIf='loadingNum > 0'>
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class='container'  *ngIf='loadingNum === 0 && numOfHoldings === 0'>
+  <div class="alert alert-warning text-center" role="alert">
+    Currently you don't have any stock.
   </div>
 </div>

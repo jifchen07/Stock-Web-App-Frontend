@@ -16,6 +16,8 @@ export class PortfolioPageComponent implements OnInit {
   holdings = {};
   lastPriceInfo = {};
   modalRef = null;
+  loadingNum = 0;
+  numOfHoldings = 0;
 
   constructor(
     private router: Router,
@@ -26,12 +28,15 @@ export class PortfolioPageComponent implements OnInit {
   ngOnInit(): void {
     this.holdings = this.localStorageService.getPortfolio();
     this.updateData();
+    this.numOfHoldings = Object.keys(this.holdings).length;
   }
 
   updateData(): void {
     const tickers = Object.keys(this.holdings);
     if (tickers.length > 0) {
+      this.loadingNum += 1;
       this.stockInfoService.getLastPriceData(tickers.toString()).subscribe((data: Array<any>) => {
+        this.loadingNum -= 1;
         console.log(data);
         this.lastPriceInfo = {};
         data.forEach(item => {
@@ -72,6 +77,7 @@ export class PortfolioPageComponent implements OnInit {
     this.modalRef.componentInstance.totalNum = numOfShares;
     this.modalRef.result.finally(() => {
       this.holdings = this.localStorageService.getPortfolio();
+      this.numOfHoldings = Object.keys(this.holdings).length;
     });
   }
 }
