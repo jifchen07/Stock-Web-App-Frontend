@@ -26,6 +26,7 @@ export class DetailPageComponent implements OnInit {
   };
   historicalPriceData;  // pass into charts-tab
   ticker: string;
+  loadingNum = 0;
 
 
   constructor(private stockInfoService: StockInfoService, private route: ActivatedRoute) { }
@@ -40,19 +41,25 @@ export class DetailPageComponent implements OnInit {
   }
 
   updateData(): void {
+    this.loadingNum += 1;
     this.stockInfoService.getDescriptionData(this.ticker).subscribe((data) => {
+      this.loadingNum -= 1;
       this.descriptionData = data;
       console.log(this.descriptionData);
     });
     // this.data = this.stockInfoService.data;
     // console.log('in showData()' + this.data);
 
+    this.loadingNum += 1;
     this.stockInfoService.getNewsData(this.ticker).subscribe((data) => {
+      this.loadingNum -= 1;
       this.newsData = data;
       console.log(this.newsData);
     });
 
+    this.loadingNum += 1;
     this.stockInfoService.get2yearsPriceData(this.ticker).subscribe((data) => {
+      this.loadingNum -= 1;
       this.historicalPriceData = data;
       console.log(this.historicalPriceData);
     });
@@ -95,7 +102,9 @@ export class DetailPageComponent implements OnInit {
 
   // get the price data for one day (either current day if market open or last day of market closed)
   updateDailyPriceData(fromDate: string): void {
+    this.loadingNum += 1;
     this.stockInfoService.getDailyPriceData(this.ticker, fromDate).subscribe((data: Array<any>) => {
+      this.loadingNum -= 1;
       // tslint:disable-next-line: prefer-for-of
       console.log(data);
       let priceSeries = [];

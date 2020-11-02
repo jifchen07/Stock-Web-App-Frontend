@@ -1,3 +1,11 @@
 .stretched-tabs {
-  max-width: 800px;
+  max-width: 1000px;
+}
+
+.container {
+  max-width: 1000px;
+}
+
+.row {
+  margin-top: 200px;
 }

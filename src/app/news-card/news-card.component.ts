@@ -6,9 +6,9 @@ import * as moment from 'moment';
   selector: 'ngbd-modal-content',
   template: `
     <div class="modal-header">
-      <h1 class="modal-title"><b>{{article.source.name}}</b><br>
-        <small>{{publishedDate}}</small></h1>
-      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <h1 class="modal-title mb-0"><b>{{article.source.name}}</b><br>
+        <small style='font-size: 15px'>{{publishedDate}}</small></h1>
+      <button style='outline:0' type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -17,11 +17,20 @@ import * as moment from 'moment';
       <p>{{article.description}}!</p>
       <p>For more details click <a href='{{article.url}}' target='_blank'>here</a></p>
     </div>
+    <div class='card m-1'>
+      <div class='card-body'>
+        <p>Share</p><br>
+        <a class="twitter-share-button mr-2" target="_blank"
+        href='https://twitter.com/intent/tweet?text={{article.title}}%20{{article.url}}'><i style="font-size: 30px" class="fab fa-twitter"></i></a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{article.url}}" target="_blank"><i style="font-size: 30px" class="fab fa-facebook-square"></i></a>
+      </div>
+    </div>
     <!-- <div class="modal-footer">
       <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
     </div> -->
   `
 })
+
 
 export class NgbdModalContent {
   @Input() article; // passed in from the openNewsModal function
