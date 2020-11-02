@@ -39,7 +39,7 @@ export class StockInfoService {
       .subscribe((res: Array<any>) => {
         console.log(res);
         for (let i = 0; i < Math.min(10, res.length); i++) {
-          names.push(res[i]["name"]);
+          names.push({name: res[i].name, ticker: res[i].ticker});
         }
       });
     return names;

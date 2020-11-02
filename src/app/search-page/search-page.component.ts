@@ -12,7 +12,7 @@ import {FormControl} from '@angular/forms';
 })
 export class SearchPageComponent implements OnInit {
   myControl = new FormControl();
-  options: string[] = [];
+  options: Array<any> = [];
 
   ticker: string;
 
