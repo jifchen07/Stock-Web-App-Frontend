@@ -1,22 +1,28 @@
 <div class="modal-header">
-  <h1 class="modal-title">{{ticker.toUpperCase()}} </h1>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+  <h1 class="modal-title ml-2">{{ticker.toUpperCase()}} </h1>
+  <button type="button" style='outline: 0' class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 
-<div class="modal-body">
+<div class="modal-body ml-4">
   <p>Current Price: {{tickerPrice}} </p><br>
   <!-- <form> -->
     <label>Quantity </label>
     <input type="number" id="quantity" name="quantity" min='0' [(ngModel)]="numOfStocks" (ngModelChange)='calculateCost()'>
   <!-- </form> -->
 </div>
-<div class="modal-footer">
-  <p class=''>Total: {{totalCost.toFixed(2)}}</p>
-  <button
-  type="button" class="btn btn-outline-dark"
-  [disabled]='!(numOfStocks > 0)' (click)="buyStocks(); activeModal.close('Close click')">
-    Buy
-  </button>
+<div class="modal-footer container justify-content-center text-center">
+  <div class='row'>
+    <div class='col-6'>
+      <p class='float-left ml-0 mt-2'>Total: {{totalCost.toFixed(2)}}</p>
+    </div>
+    <div class='col-6'>
+      <button
+      type="button" class="btn btn-success float-right"
+      [disabled]='!(numOfStocks > 0)' (click)="buyStocks(); activeModal.close('Close click')">
+        Buy
+      </button>
+    </div>
+  </div>
 </div>
