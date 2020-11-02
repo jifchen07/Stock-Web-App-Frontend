@@ -21,7 +21,7 @@ export class ModalBuyComponent implements OnInit {
     console.log(this.ticker);
   }
 
-  calculateCost(): void {
+  public calculateCost(): void {
     console.log('changed');
     this.totalCost = this.numOfStocks * this.tickerPrice;
   }

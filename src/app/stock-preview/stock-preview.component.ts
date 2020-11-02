@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ModalBuyComponent } from './../modal-buy/modal-buy.component';
+import { IterableDiffer, IterableDiffers, DoCheck, IterableChanges } from '@angular/core';
 
 
 // @Component({
@@ -54,22 +55,35 @@ import { ModalBuyComponent } from './../modal-buy/modal-buy.component';
 export class StockPreviewComponent implements OnInit {
   @Input() descriptionData;
   @Input() lastPriceData: PriceData;
+  @Input() lastPrice: number;
   modalRef = null;
+
+  private diff: IterableDiffer<any>;
 
   favorited: boolean = false;
 
-  constructor(private localStorageService: LocalStorageService, private modalService: NgbModal) { }
+  constructor(
+    private iterableDiffers: IterableDiffers,
+    private localStorageService: LocalStorageService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.checkFavoriteStatus();
+    this.diff = this.iterableDiffers.find(this.lastPriceData).create();
   }
+
+  // ngDoCheck(): void {
+  //   const changes: IterableChanges<any> = this.diff.diff(this.lastPriceData);
+  // }
 
   ngOnChanges(): void {
     this.checkFavoriteStatus();
+    console.log('price changed');
+    console.log(this.modalRef);
     if (this.modalRef) {
       this.modalRef.componentInstance.ticker = this.descriptionData.ticker;
       this.modalRef.componentInstance.tickerPrice = this.lastPriceData.lastPrice;
       this.modalRef.componentInstance.name = this.descriptionData.name;
+      this.modalRef.componentInstance.calculateCost();
     }
   }
 

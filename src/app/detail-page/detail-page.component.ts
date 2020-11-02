@@ -37,7 +37,7 @@ export class DetailPageComponent implements OnInit {
     // this.stockInfoService.getData();
     this.updateData();
     this.refreshPriceData();
-    // setInterval(() => { this.refreshPriceData()}, 15000 );
+    // setInterval(() => { this.refreshPriceData()}, 10000 );
   }
 
   updateData(): void {
@@ -102,9 +102,9 @@ export class DetailPageComponent implements OnInit {
 
   // get the price data for one day (either current day if market open or last day of market closed)
   updateDailyPriceData(fromDate: string): void {
-    this.loadingNum += 1;
+    // this.loadingNum += 1;
     this.stockInfoService.getDailyPriceData(this.ticker, fromDate).subscribe((data: Array<any>) => {
-      this.loadingNum -= 1;
+      // this.loadingNum -= 1;
       // tslint:disable-next-line: prefer-for-of
       console.log(data);
       let priceSeries = [];
