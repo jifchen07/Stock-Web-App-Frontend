@@ -1,4 +1,4 @@
-<div class="d-flex">
+<!-- <div class="d-flex">
   <h1>Stock Search</h1>
   <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills">
     <li ngbNavItem="Search">
@@ -15,4 +15,35 @@
   <div [ngbNavOutlet]="nav" class="ml-4"></div>
 </div>
 
-<pre>Active: {{ active }}</pre>
+<pre>Active: {{ active }}</pre> -->
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #6F4FFB;">
+  <a class="navbar-brand" href="">Stock Search</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+    <ul class="navbar-nav nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link" href="">Search <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="watchlist">Watchlist</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="portfolio">Portfolio</a>
+      </li>
+    </ul>
+    <!-- <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills">
+      <li ngbNavItem="Search">
+        <a ngbNavLink routerLink=''>Search</a>
+      </li>
+      <li ngbNavItem="Watchlist">
+        <a ngbNavLink routerLink='watchlist'>Watchlist</a>
+      </li>
+      <li ngbNavItem="Portfolio">
+        <a ngbNavLink routerLink='portfolio'>Portfolio</a>
+      </li>
+    </ul> -->
+  </div>
+</nav>

@@ -1,0 +1,33 @@
+button {
+  border:0
+}
+
+input {
+  height: 40px;
+}
+.searchBox {
+  margin-top: 50px;
+}
+
+.mycustom {
+  text-align: center;
+  border: solid 2px blue;
+  border-radius: 20px;
+  position: relative;
+  width: 250px;
+}
+.mycustom input[type=text] {
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  width: 100%;
+  padding-right: 1px;
+  padding-left: 20px
+}
+.mycustom .input-group-prepend {
+  position: absolute;
+  border-radius: 20px;
+  right: 4px;
+  top: 4px;
+  bottom: 4px;z-index:9;
+}

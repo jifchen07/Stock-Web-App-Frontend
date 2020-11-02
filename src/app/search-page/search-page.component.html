@@ -1,6 +1,77 @@
-<h2>
-  STOCK SEARCH
-</h2>
+<div class='container' style='margin-top: 150px'>
+  <div class='row align-items-center justify-content-center'>
+    <div class='col-lg-2 text-center'>
+      <h2 style='font-size: 50px'>
+        STOCK
+      </h2>
+    </div>
+    <div class='col-lg-2 text-center'>
+      <h2 style='font-size: 50px'>
+        SEARCH
+      </h2>
+    </div>
+
+  </div>
+</div>
+
+<div class='container text-center searchBox'>
+  <div class='row justify-content-center'>
+    <div class='input-group mycustom'>
+      <input type="text"
+
+           placeholder="Enter stock name"
+           [formControl]="myControl"
+           [matAutocomplete]="auto"
+           [(ngModel)]="ticker"
+           ng-model="ticker"
+           ng-model-options="{ debounce: 500 }"
+           (ngModelChange)="updateAutoComplete()">
+    <span class="input-group-prepend">
+      <button class="btn btn-outline-secondary" type="submit" (click)='startSearch()'>
+          <i class="fa fa-search"></i>
+      </button>
+    </span>
+    </div>
+
+    <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of options" [value]="option">
+      {{option}}
+    </mat-option>
+    </mat-autocomplete>
+  </div>
+</div>
+
+<!-- <div class='container text-center'>
+  <form class="">
+    <mat-form-field class="example-full-width">
+      <input type="text"
+             placeholder="Enter stock name"
+             aria-label="Number"
+             matInput
+             [formControl]="myControl"
+             [matAutocomplete]="auto"
+             [(ngModel)]="ticker"
+             ng-model="ticker"
+             ng-model-options="{ debounce: 500 }"
+             (ngModelChange)="updateAutoComplete()">
+      <span class="input-group-append float-right">
+        <button class="btn btn-outline-secondary" type="submit" (click)='startSearch()'>
+            <i class="fa fa-search"></i>
+        </button>
+      </span>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of options" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+
+    </mat-form-field>
+  </form>
+</div> -->
+
+
+
+
 <!-- <div class="input-group col-md-4">
   <input class="form-control py-2 border-right-0 border" type="search" placeholder="Enter stock name" [(ngModel)]="ticker" id="search-input">
   <span class="input-group-append">
@@ -9,7 +80,7 @@
       </button>
     </span>
 </div> -->
-<form class="">
+<!-- <form class="">
   <mat-form-field class="example-full-width">
     <input type="text"
            placeholder="Enter stock name"
@@ -33,4 +104,4 @@
     </mat-autocomplete>
 
   </mat-form-field>
-</form>
+</form> -->
