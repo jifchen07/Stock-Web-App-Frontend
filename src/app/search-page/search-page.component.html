@@ -34,11 +34,17 @@
     </div>
 
     <mat-autocomplete #auto="matAutocomplete">
-    <mat-option *ngFor="let option of options" [value]="option.ticker">
-      <span>{{option.ticker}} </span>
-      <span style="font-size: smaller;">| {{option.name}}</span>
-
-    </mat-option>
+    <ng-container *ngIf='loading'>
+      <mat-option >
+        <mat-spinner diameter='20'></mat-spinner>
+      </mat-option>
+    </ng-container>
+    <ng-container *ngIf='!loading'>
+      <mat-option *ngFor="let option of options" [value]="option.ticker">
+        <span>{{option.ticker}} </span>
+        <span style="font-size: smaller;">| {{option.name}}</span>
+      </mat-option>
+    </ng-container>
     </mat-autocomplete>
   </div>
 </div>

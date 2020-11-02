@@ -34,6 +34,8 @@ import { ModalBuyComponent } from './modal-buy/modal-buy.component';
 import { PortfolioPageComponent } from './portfolio-page/portfolio-page.component';
 import { ModalSellComponent } from './modal-sell/modal-sell.component';
 
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +65,8 @@ import { ModalSellComponent } from './modal-sell/modal-sell.component';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

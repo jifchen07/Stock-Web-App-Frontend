@@ -33,16 +33,8 @@ export class StockInfoService {
     return this.http.get(`${this.serverHost}/search/lastdayprices/${ticker}`);
   }
 
-  getAutoCompleteData(formInput: string): string[] {
-    let names = [];
-    this.http.get(`${this.serverHost}/search/autocomplete/${formInput}`)
-      .subscribe((res: Array<any>) => {
-        console.log(res);
-        for (let i = 0; i < Math.min(10, res.length); i++) {
-          names.push({name: res[i].name, ticker: res[i].ticker});
-        }
-      });
-    return names;
+  getAutoCompleteData(formInput: string): Observable<object> {
+    return this.http.get(`${this.serverHost}/search/autocomplete/${formInput}`);
   }
 
   getNewsData(ticker: string): Observable<object> {

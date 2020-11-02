@@ -13,6 +13,8 @@ import {FormControl} from '@angular/forms';
 export class SearchPageComponent implements OnInit {
   myControl = new FormControl();
   options: Array<any> = [];
+  loading: boolean = false;
+  sub;
 
   ticker: string;
 
@@ -30,9 +32,31 @@ export class SearchPageComponent implements OnInit {
 
   updateAutoComplete(): void {
     if (this.ticker) {
-      this.options = this.stockInfoService.getAutoCompleteData(this.ticker);
+      this.loading = true;
+      if (this.sub) {
+        this.sub.unsubscribe();
+      }
+      this.sub = this.stockInfoService.getAutoCompleteData(this.ticker).subscribe((res: Array<any>) => {
+        console.log(res);
+        this.options = [];
+        for (let i = 0; i < Math.min(10, res.length); i++) {
+          this.options.push({name: res[i].name, ticker: res[i].ticker});
+        }
+        this.loading = false;
+        console.log(this.options);
+      });
     } else {
       this.options = [];
     }
   }
 }
+
+// let names = [];
+//     this.http.get(`${this.serverHost}/search/autocomplete/${formInput}`)
+//       .subscribe((res: Array<any>) => {
+//         console.log(res);
+//         for (let i = 0; i < Math.min(10, res.length); i++) {
+//           names.push({name: res[i].name, ticker: res[i].ticker});
+//         }
+//       });
+//     return names;
