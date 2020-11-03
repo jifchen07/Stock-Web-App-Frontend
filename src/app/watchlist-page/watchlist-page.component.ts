@@ -17,6 +17,9 @@ export class WatchlistPageComponent implements OnInit {
   descriptionData: Array<any> = [];
   loadingNum = 0;
 
+  forceClose = true;
+  alertMessage = '';
+
   constructor(private router: Router, private localStorageService: LocalStorageService, private stockInfoService: StockInfoService) { }
 
   ngOnInit(): void {
@@ -72,7 +75,11 @@ export class WatchlistPageComponent implements OnInit {
   }
 
   removeTicker(index: number): void {
-    console.log('clicked');
+    const ticker = this.watchlist[index];
+    this.alertMessage = `${ticker} removed from Watchlist`;
+    this.forceClose = false;
+    setTimeout(() => this.forceClose = true, 5000);
+
     this.watchlist.splice(index, 1);
     this.priceData.splice(index, 1);
     this.descriptionData.splice(index, 1);

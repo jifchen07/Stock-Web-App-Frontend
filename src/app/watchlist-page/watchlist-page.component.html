@@ -1,17 +1,10 @@
+<div class='container mt-1 mb-1'>
+  <ngb-alert *ngIf="!forceClose" class='text-center' type='danger' (close)="forceClose = true">{{alertMessage}}</ngb-alert>
+</div>
 <div class='container mt-5 mb-5'>
   <h1><b>My Watchlist</b></h1>
 </div>
 
-<!-- <button> Click me </button>
-<div class="card card-outline-danger text-center">
-  <span class="pull-right clickable close-icon" data-effect="fadeOut"><i class="fa fa-times"></i></span>
-  <div class="card-block">
-    <blockquote class="card-blockquote">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-      <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-    </blockquote>
-  </div>
-</div> -->
 <div class="container" *ngIf='loadingNum === 0'>
   <div>
     <div *ngFor='let ticker of watchlist; index as i' class='card mb-2' type='button' (click)='navigateTo(ticker)'>
