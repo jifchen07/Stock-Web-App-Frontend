@@ -1,9 +1,13 @@
+<div class='container mt-1 mb-1'>
+  <ngb-alert *ngIf="alertNum > 0 && !forceClose" class='text-center' [type]='alertType' (close)="clearAlert()">{{alertMessage}}</ngb-alert>
+</div>
 <div *ngIf='loadingNum == 0'>
   <div class='container'>
     <app-stock-preview
      [descriptionData]='descriptionData'
      [lastPriceData]='lastPriceData'
-     [lastPrice]='lastPriceData.lastPrice'></app-stock-preview>
+     [lastPrice]='lastPriceData.lastPrice'
+     (toggleFavorite)='popAlert($event)'></app-stock-preview>
   </div>
 
   <div class='container mt-3 mb-3'>
