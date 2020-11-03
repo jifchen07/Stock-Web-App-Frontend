@@ -21,6 +21,7 @@ export class StockPreviewComponent implements OnInit {
 
   // for sending signal to parent if favorate/unfavorate event happens
   @Output() toggleFavorite: EventEmitter<any> = new EventEmitter<any>();
+  @Output() buyAlert: EventEmitter<any> = new EventEmitter<any>();
 
   favorited: boolean = false;
 
@@ -68,6 +69,11 @@ export class StockPreviewComponent implements OnInit {
     this.modalRef.componentInstance.ticker = this.descriptionData.ticker;
     this.modalRef.componentInstance.tickerPrice = this.lastPriceData.lastPrice;
     this.modalRef.componentInstance.name = this.descriptionData.name;
+    this.modalRef.result.then((res) => {
+      if (res === 'Bought') {
+        this.buyAlert.emit('bought');
+      }
+    });
 
     // const modalRef = this.modalService.open(ModalBuyComponent);
     // modalRef.componentInstance.ticker = this.descriptionData.ticker;

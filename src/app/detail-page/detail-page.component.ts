@@ -27,10 +27,13 @@ export class DetailPageComponent implements OnInit {
   historicalPriceData;  // pass into charts-tab
   ticker: string;
   loadingNum = 0;
+
   alertNum = 0;
   alertType = null;
   alertMessage = '';
   forceClose = true;
+
+  buyAlert = false;
 
   constructor(private stockInfoService: StockInfoService, private route: ActivatedRoute) { }
 
@@ -50,12 +53,15 @@ export class DetailPageComponent implements OnInit {
       this.alertNum += 1;
       this.forceClose = false;
       setTimeout(() => this.alertNum -= 1, 5000);
-    } else {
+    } else if (valueEmitted === 'unfavorated') {
       this.alertType = 'danger';
       this.alertMessage = `${this.ticker} removed from Watchlist`;
       this.alertNum += 1;
       this.forceClose = false;
       setTimeout(() => this.alertNum -= 1, 5000);
+    } else {
+      this.buyAlert = true;
+      setTimeout(() => this.buyAlert = false, 5000);
     }
   }
 

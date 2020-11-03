@@ -15,8 +15,8 @@ export class WatchlistPageComponent implements OnInit {
   watchlist: Array<string> = [];
   priceData: Array<PriceData> = [];
   descriptionData: Array<any> = [];
-  loadingNum = 0;
 
+  loadingNum = 0;
   forceClose = true;
   alertMessage = '';
 
