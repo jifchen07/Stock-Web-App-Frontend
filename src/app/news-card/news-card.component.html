@@ -1,7 +1,7 @@
-<div class='container my-container'>
-  <div class='row my-row'>
-    <div class='col-lg-6 my-col'>
-      <div class="card mb-0 h-100" type='button' (click)="openNewsModal(2*rowNum)">
+<div class='container'>
+  <div class='row'>
+    <div class='col-lg-6 mb-1 mt-2'>
+      <div class="card h-100 mb-0" type='button' (click)="openNewsModal(2*rowNum)">
         <div class="card-body">
           <div class='row'>
             <div class='col-sm-4 col-lg-4'>
@@ -14,8 +14,8 @@
         </div>
       </div>
     </div>
-    <div *ngIf='articles[2*rowNum+1]' class='col-lg-6 my-col'>
-      <div class="card mb-0 h-100" type='button' (click)="openNewsModal(2*rowNum+1)">
+    <div *ngIf='articles[2*rowNum+1]' class='col-lg-6 mb-1 mt-2'>
+      <div class="card h-100 mb-0" type='button' (click)="openNewsModal(2*rowNum+1)">
         <div class="card-body">
           <div class='row'>
             <div class='col-sm-4 col-lg-4'>

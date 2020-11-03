@@ -21,7 +21,7 @@ export class SummaryTabComponent implements OnInit {
     // },
     time: {
       // timezone: 'America/New_York'
-      timezoneOffset: 14 * 60
+      timezoneOffset: 15 * 60
     },
     title: {
        text: ''

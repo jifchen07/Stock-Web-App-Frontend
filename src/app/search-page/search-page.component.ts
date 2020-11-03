@@ -46,6 +46,10 @@ export class SearchPageComponent implements OnInit {
         console.log(this.options);
       });
     } else {
+      if (this.sub) {
+        this.sub.unsubscribe();
+        this.loading = false;
+      }
       this.options = [];
     }
   }

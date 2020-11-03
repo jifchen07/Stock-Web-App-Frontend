@@ -1,37 +1,46 @@
-<div class='container mt-1 mb-1'>
-  <ngb-alert *ngIf="alertNum > 0 && !forceClose" class='text-center' [type]='alertType' (close)="clearAlert()">{{alertMessage}}</ngb-alert>
-</div>
-<div class='container mt-1 mb-1'>
-  <ngb-alert *ngIf="buyAlert" class='text-center' type='success' (close)="buyAlert = false">{{ticker}} bought successfully!</ngb-alert>
-</div>
-<div *ngIf='loadingNum == 0'>
-  <div class='container'>
-    <app-stock-preview
-     [descriptionData]='descriptionData'
-     [lastPriceData]='lastPriceData'
-     [lastPrice]='lastPriceData.lastPrice'
-     (toggleFavorite)='popAlert($event)'
-     (buyAlert)='popAlert($event)'></app-stock-preview>
+<div class='container mt-5' *ngIf='resultNotFount'>
+  <div class="alert alert-danger text-center smaller" role="alert">
+    No results found. Please enter valid Ticker.
   </div>
+</div>
 
-  <div class='container mt-3 mb-3'>
-    <mat-tab-group mat-stretch-tabs class="stretched-tabs mat-elevation-z4">
-      <mat-tab label="Summary">
-        <app-summary-tab [priceData]='priceData'
-          [descriptionData]='descriptionData'
-          [priceSeriesData]='priceSeriesData'>
-        </app-summary-tab>
-      </mat-tab>
-      <mat-tab label="Top News"> <app-news-tab [newsData]='newsData'></app-news-tab> </mat-tab>
-      <mat-tab label="Charts">
-        <ng-template matTabContent>
-          <app-charts-tab [historicalPriceData]='historicalPriceData' [ticker]='ticker'>
-          </app-charts-tab>
-        </ng-template>
-      </mat-tab>
-    </mat-tab-group>
+<div *ngIf='!resultNotFount'>
+  <div class='container mt-1 mb-1'>
+    <ngb-alert *ngIf="alertNum > 0 && !forceClose" class='text-center' [type]='alertType' (close)="clearAlert()">{{alertMessage}}</ngb-alert>
+  </div>
+  <div class='container mt-1 mb-1'>
+    <ngb-alert *ngIf="buyAlert" class='text-center' type='success' (close)="buyAlert = false">{{ticker}} bought successfully!</ngb-alert>
+  </div>
+  <div *ngIf='loadingNum == 0'>
+    <div class='container'>
+      <app-stock-preview
+       [descriptionData]='descriptionData'
+       [lastPriceData]='lastPriceData'
+       [lastPrice]='lastPriceData.lastPrice'
+       (toggleFavorite)='popAlert($event)'
+       (buyAlert)='popAlert($event)'></app-stock-preview>
+    </div>
+
+    <div class='container mt-3 mb-3'>
+      <mat-tab-group mat-stretch-tabs class="stretched-tabs mat-elevation-z4">
+        <mat-tab label="Summary">
+          <app-summary-tab [priceData]='priceData'
+            [descriptionData]='descriptionData'
+            [priceSeriesData]='priceSeriesData'>
+          </app-summary-tab>
+        </mat-tab>
+        <mat-tab label="Top News"> <app-news-tab [newsData]='newsData'></app-news-tab> </mat-tab>
+        <mat-tab label="Charts">
+          <ng-template matTabContent>
+            <app-charts-tab [historicalPriceData]='historicalPriceData' [ticker]='ticker'>
+            </app-charts-tab>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
   </div>
 </div>
+
 
 <div class='row justify-content-center' *ngIf='loadingNum > 0'>
   <mat-spinner></mat-spinner>

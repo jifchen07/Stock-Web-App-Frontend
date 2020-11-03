@@ -3,11 +3,11 @@
 </div>
 <div *ngIf='loadingNum === 0' class='container'>
   <div *ngFor='let holding of holdings | keyvalue' class='card mb-2'>
-    <div class='card-header'>
+    <div class='card-header' type='button' (click)='navigateTo(holding.key)'>
       <span class='mr-2 ticker'>{{holding.key}}</span>
       <span class='name'>{{holding.value.name}}</span>
     </div>
-    <div class='card-body' type='button' (click)='navigateTo(holding.key)'>
+    <div class='card-body'>
       <div class='row'>
         <div class='col-lg-6'>
           <div class='row justify-content-between ml-1 mr-1'>
@@ -49,7 +49,7 @@
     </div>
     <div class='card-footer'>
       <button type='button' class='btn btn-danger float-right mr-1' (click)='openSellModal(holding.key, lastPriceInfo[holding.key].lastPrice, holding.value.numOfShares)'>Sell</button>
-      <button type='button' class='btn btn-success float-right mr-3' (click)='openBuyModal(holding.key, lastPriceInfo[holding.key].lastPrice, holding.value.name)'>Buy</button>
+      <button type='button' class='btn btn-primary float-right mr-3' (click)='openBuyModal(holding.key, lastPriceInfo[holding.key].lastPrice, holding.value.name)'>Buy</button>
     </div>
   </div>
 </div>

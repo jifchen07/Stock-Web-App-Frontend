@@ -35,6 +35,8 @@ export class DetailPageComponent implements OnInit {
 
   buyAlert = false;
 
+  resultNotFount = false;
+
   constructor(private stockInfoService: StockInfoService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -73,6 +75,11 @@ export class DetailPageComponent implements OnInit {
     this.loadingNum += 1;
     this.stockInfoService.getDescriptionData(this.ticker).subscribe((data) => {
       this.loadingNum -= 1;
+      if (Object.keys(data).length === 1) {
+        this.resultNotFount = true;
+      } else {
+        this.resultNotFount = false;
+      }
       this.descriptionData = data;
       console.log(this.descriptionData);
     });
