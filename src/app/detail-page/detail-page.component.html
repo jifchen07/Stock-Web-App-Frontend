@@ -26,7 +26,8 @@
         <mat-tab label="Summary">
           <app-summary-tab [priceData]='priceData'
             [descriptionData]='descriptionData'
-            [priceSeriesData]='priceSeriesData'>
+            [priceSeriesData]='priceSeriesData'
+            [changeDir]='lastPriceData.changeDir'>
           </app-summary-tab>
         </mat-tab>
         <mat-tab label="Top News"> <app-news-tab [newsData]='newsData'></app-news-tab> </mat-tab>

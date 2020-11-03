@@ -11,6 +11,7 @@ export class SummaryTabComponent implements OnInit {
   @Input() priceData;
   @Input() descriptionData;
   @Input() priceSeriesData;
+  @Input() changeDir;
 
   Highcharts: typeof Highcharts = Highcharts; // required
   chartConstructor: string = 'stockChart'; // optional string, defaults to 'chart'
@@ -21,7 +22,7 @@ export class SummaryTabComponent implements OnInit {
     // },
     time: {
       // timezone: 'America/New_York'
-      timezoneOffset: 15 * 60
+      timezoneOffset: 16 * 60
     },
     title: {
        text: ''
@@ -45,7 +46,9 @@ export class SummaryTabComponent implements OnInit {
     series: [
        {
           name: '',
-          data: []
+          data: [],
+          color: '#008000',
+          fillColor: '#008000',
        },
     ]
   };
@@ -72,6 +75,10 @@ export class SummaryTabComponent implements OnInit {
     this.chartOptions.title.text = this.descriptionData.ticker;
     this.chartOptions.series[0].data = this.priceSeriesData;
     this.chartOptions.series[0].name = this.descriptionData.ticker;
+    if (this.changeDir === 'down') {
+      this.chartOptions.series[0].color = '#FF0000';
+      this.chartOptions.series[0].fillColor = '#FF0000';
+    }
   }
 
 }
