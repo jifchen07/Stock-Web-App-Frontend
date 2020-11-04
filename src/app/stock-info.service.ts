@@ -10,7 +10,7 @@ import { timestampToYYYYMMDD } from './utility-funcs';
 })
 export class StockInfoService {
   ticker: string;
-  serverHost = 'http://localhost:3000';
+  serverHost = 'https://stock-search-backend-110320.wl.r.appspot.com/';
 
   constructor(private http: HttpClient) { }
 
