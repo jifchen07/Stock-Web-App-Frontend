@@ -81,7 +81,7 @@ export class DetailPageComponent implements OnInit {
         this.resultNotFount = false;
       }
       this.descriptionData = data;
-      console.log(this.descriptionData);
+      // console.log(this.descriptionData);
     });
     // this.data = this.stockInfoService.data;
     // console.log('in showData()' + this.data);
@@ -90,14 +90,14 @@ export class DetailPageComponent implements OnInit {
     this.stockInfoService.getNewsData(this.ticker).subscribe((data) => {
       this.loadingNum -= 1;
       this.newsData = data;
-      console.log(this.newsData);
+      // console.log(this.newsData);
     });
 
     this.loadingNum += 1;
     this.stockInfoService.get2yearsPriceData(this.ticker).subscribe((data) => {
       this.loadingNum -= 1;
       this.historicalPriceData = data;
-      console.log(this.historicalPriceData);
+      // console.log(this.historicalPriceData);
     });
   }
 
@@ -105,7 +105,7 @@ export class DetailPageComponent implements OnInit {
   refreshPriceData(): void {
     this.stockInfoService.getLastPriceData(this.ticker).subscribe((data) => {
       this.priceData = data[0];
-      console.log(data);
+      // console.log(data);
       this.lastPriceData.lastPrice = data[0].last;
       const change = (data[0].last - data[0].prevClose);
       const changePercentage = change * 100 / data[0].prevClose;
@@ -117,7 +117,7 @@ export class DetailPageComponent implements OnInit {
 
       if (data[0].askPrice == null) {
         // if market is closed
-        console.log('market closed');
+        // console.log('market closed');
         this.lastPriceData.timestamp = formatCurrentTime();
         const lastTime = data[0].timestamp.substring(0, 10)
           + ' ' + '13:00:00';
@@ -142,7 +142,7 @@ export class DetailPageComponent implements OnInit {
     this.stockInfoService.getDailyPriceData(this.ticker, fromDate).subscribe((data: Array<any>) => {
       // this.loadingNum -= 1;
       // tslint:disable-next-line: prefer-for-of
-      console.log(data);
+      // console.log(data);
       let priceSeries = [];
       for (let i = 0; i < data.length; i++) {
         let timeString = new Date(data[i].date.substring(0, 19)).toString();
@@ -150,8 +150,8 @@ export class DetailPageComponent implements OnInit {
         priceSeries[i] = [timestamp, data[i].close];
       }
       this.priceSeriesData = priceSeries;
-      console.log('dailypriceupdate: ');
-      console.log(this.priceSeriesData);
+      // console.log('dailypriceupdate: ');
+      // console.log(this.priceSeriesData);
 
     });
   }

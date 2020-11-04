@@ -18,11 +18,11 @@ export class ModalBuyComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal, private localStorageService: LocalStorageService) { }
 
   ngOnInit(): void {
-    console.log(this.ticker);
+    // console.log(this.ticker);
   }
 
   public calculateCost(): void {
-    console.log('changed');
+    // console.log('changed');
     this.totalCost = this.numOfStocks * this.tickerPrice;
   }
 

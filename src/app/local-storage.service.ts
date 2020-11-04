@@ -39,7 +39,7 @@ export class LocalStorageService {
     let tickers = this.getWatchlist();
     tickers.splice(index, 1);
     this.localStorage.setItem('watchlist', JSON.stringify(tickers));
-    console.log(this.getWatchlist());
+    // console.log(this.getWatchlist());
   }
 
   addTickerByName(ticker: string): void {

@@ -38,8 +38,8 @@ export class StockPreviewComponent implements OnInit {
 
   ngOnChanges(): void {
     this.checkFavoriteStatus();
-    console.log('price changed');
-    console.log(this.modalRef);
+    // console.log('price changed');
+    // console.log(this.modalRef);
     if (this.modalRef) {
       this.modalRef.componentInstance.ticker = this.descriptionData.ticker;
       this.modalRef.componentInstance.tickerPrice = this.lastPriceData.lastPrice;

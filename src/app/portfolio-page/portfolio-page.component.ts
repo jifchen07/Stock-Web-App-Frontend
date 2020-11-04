@@ -37,7 +37,7 @@ export class PortfolioPageComponent implements OnInit {
       this.loadingNum += 1;
       this.stockInfoService.getLastPriceData(tickers.toString()).subscribe((data: Array<any>) => {
         this.loadingNum -= 1;
-        console.log(data);
+        // console.log(data);
         this.lastPriceInfo = {};
         data.forEach(item => {
           const key = item.ticker;

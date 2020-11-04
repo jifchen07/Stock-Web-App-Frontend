@@ -16,7 +16,7 @@ export class StockInfoService {
 
   public setTickerValue(ticker: string): void {
     this.ticker = ticker;
-    console.log('ticker in service' + this.ticker);
+    // console.log('ticker in service' + this.ticker);
   }
 
   getDescriptionData(ticker: string): Observable<object> {
