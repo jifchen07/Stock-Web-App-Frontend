@@ -120,7 +120,7 @@ export class DetailPageComponent implements OnInit {
         console.log('market closed');
         this.lastPriceData.timestamp = formatCurrentTime();
         const lastTime = data[0].timestamp.substring(0, 10)
-          + ' ' + data[0].timestamp.substring(11, 19);
+          + ' ' + '13:00:00';
         this.lastPriceData.marketStatus = 'Market Closed on ' + lastTime;
 
         const fromDate = data[0].timestamp.substring(0, 10);
