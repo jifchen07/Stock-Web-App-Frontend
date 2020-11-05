@@ -4,6 +4,8 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { formatCurrentTime, pad2 } from '../utility-funcs';
+import { ElementRef } from '@angular/core';
+import { OnDestroy } from '@angular/core';
 
 
 @Component({
@@ -11,7 +13,7 @@ import { formatCurrentTime, pad2 } from '../utility-funcs';
   templateUrl: './detail-page.component.html',
   styleUrls: ['./detail-page.component.css']
 })
-export class DetailPageComponent implements OnInit {
+export class DetailPageComponent implements OnInit, OnDestroy {
   descriptionData;  // pass into summary-tab and stock-preview
   newsData;
   priceData; // pass into summary-tab
@@ -37,7 +39,9 @@ export class DetailPageComponent implements OnInit {
 
   resultNotFount = false;
 
-  constructor(private stockInfoService: StockInfoService, private route: ActivatedRoute) { }
+  interval;
+
+  constructor(private elementRef: ElementRef, private stockInfoService: StockInfoService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.ticker = this.route.snapshot.params.ticker;
@@ -45,7 +49,13 @@ export class DetailPageComponent implements OnInit {
     // this.stockInfoService.getData();
     this.updateData();
     this.refreshPriceData();
-    // setInterval(() => { this.refreshPriceData()}, 10000 );
+    this.interval = setInterval(() => { this.refreshPriceData()}, 15000 );
+  }
+
+  ngOnDestroy(): void {
+    // console.log('ng destroy');
+    this.elementRef.nativeElement.remove();
+    clearInterval(this.interval);
   }
 
   popAlert(valueEmitted: string): void {
@@ -105,7 +115,7 @@ export class DetailPageComponent implements OnInit {
   refreshPriceData(): void {
     this.stockInfoService.getLastPriceData(this.ticker).subscribe((data) => {
       this.priceData = data[0];
-      // console.log(data);
+      console.log(data);
       this.lastPriceData.lastPrice = data[0].last;
       const change = (data[0].last - data[0].prevClose);
       const changePercentage = change * 100 / data[0].prevClose;
@@ -115,7 +125,7 @@ export class DetailPageComponent implements OnInit {
       }
       this.lastPriceData.changePercentage = '(' + changePercentage.toFixed(2) + '%' + ')';
 
-      if (data[0].askPrice == null) {
+      if (data[0].askPrice == null || data[0].askPrice === 0) {
         // if market is closed
         // console.log('market closed');
         this.lastPriceData.timestamp = formatCurrentTime();
