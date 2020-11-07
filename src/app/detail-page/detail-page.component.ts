@@ -125,7 +125,14 @@ export class DetailPageComponent implements OnInit, OnDestroy {
       }
       this.lastPriceData.changePercentage = '(' + changePercentage.toFixed(2) + '%' + ')';
 
-      if (data[0].askPrice == null || data[0].askPrice === 0) {
+      const timestamp = new Date(data[0].timestamp);
+      const timestampCurrent = new Date();
+      const timeDiff = Math.abs(timestamp.getTime() - timestampCurrent.getTime());
+      const diffSeconds = Math.floor(timeDiff / 1000);
+      console.log(diffSeconds);
+
+      // if (data[0].askPrice == null || data[0].askPrice === 0) {
+      if (diffSeconds > 60 && (data[0].askPrice == null || data[0].askPrice === 0)) {
         // if market is closed
         // console.log('market closed');
         this.lastPriceData.timestamp = formatCurrentTime();
