@@ -1,6 +1,41 @@
-# StockAppFrontend
+# Stock Web App Frontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.7.
+
+This is a client side-web app developed using HTML5, Bootstrap and Angular.js. It interacts with server-side app written in Node.js to support stock search, trade (simulation) and data visualization functionalities. The app is deployed on Google App Engine (GAE).
+
+## High level description   
+
+There are 4 routes for this application:
+
+- Homepage/ Search Route [‘/’] – It is a default route of this application.
+- Watchlist Route [‘/watchlist’] – It displays the watchlist of the user.
+- Portfolio Route [‘/portfolio’] – It displays the portfolio of the user.
+- Details Route [‘/details/<ticker>’] – It shows the details of the <ticker>.
+
+## Demo screenshots
+
+* Search page
+
+  ![search](imgs/search.png)
+
+* Stock details page
+
+  ![summary](imgs/summary.png)
+
+  ![news](imgs/news.png)
+
+  ![charts](imgs/charts.png)
+
+* Watchlist page
+
+  ![watchlist](imgs/watchlist.png)
+
+* Portfolio page
+
+  ![portfolio](imgs/portfolio.png)
+
+  ![trade](imgs/trade.png)
 
 ## Development server
 
